@@ -65,7 +65,7 @@ chmod 644 AUTHORS ChangeLog doc/README* README* doc/*.txt doc/*.html examples/*
 
 %build
 
-%make
+make
 
 %install
 [ "%{buildroot}" != "/" ] && rm -rf %{buildroot}
