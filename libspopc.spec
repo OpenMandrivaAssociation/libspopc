@@ -12,6 +12,7 @@ URL:		http://brouits.free.fr/libspopc/
 Source0:	http://brouits.free.fr/libspopc/releases/%{name}-%{version}.tar.gz
 Patch0:		libspopc-shared.diff
 BuildRequires:	openssl-devel
+BuildRoot:	%{_tmppath}/%{name}-%{version}-root
 
 %description
 'libspopc' is a simple-to-use POP3 client library. It provides an easy and
