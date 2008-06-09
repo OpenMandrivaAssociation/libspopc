@@ -83,9 +83,13 @@ install -m0644 libspopc.h %{buildroot}%{_includedir}/
 
 cp doc/README README.examples
 
+%if %mdkversion < 200900
 %post -n %{libname} -p /sbin/ldconfig
+%endif
 
+%if %mdkversion < 200900
 %postun -n %{libname} -p /sbin/ldconfig
+%endif
 
 %clean
 [ "%{buildroot}" != "/" ] && rm -rf %{buildroot}
