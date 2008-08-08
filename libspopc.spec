@@ -5,7 +5,7 @@
 Summary:	POP3 client library
 Name:		libspopc
 Version:	0.7.8
-Release:	%mkrel 1
+Release:	%mkrel 2
 License:	LGPLv2+
 Group:		System/Libraries
 URL:		http://brouits.free.fr/libspopc/
