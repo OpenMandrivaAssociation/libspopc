@@ -1,0 +1,49 @@
+--- Makefile~	2008-05-09 02:00:54.000000000 +0200
++++ Makefile	2008-05-09 21:47:05.000000000 +0200
+@@ -4,7 +4,7 @@
+ OBJECTS=session.o queries.o parsing.o format.o objects.o
+ DBGOBJ=session-dbg.o queries-dbg.o parsing-dbg.o format-dbg.o objects-dbg.o
+ DBGFLAGS=-DEBUG -g
+-FLAGS= -Wall -Wextra -pedantic -pedantic-errors -pipe -DUSE_SSL -fPIC -Os
++CFLAGS=$(RPM_OPT_FLAGS) -fPIC -Wall -DUSE_SSL
+ #
+ # info: strdup, snprintf.. are not in ANSI versions of stdio.h/string.h
+ # this could be nice to conform to -ansi or to -std=iso9899:199409
+@@ -28,27 +28,28 @@
+ 	@echo "$$ make FLAGS='-Wall -DWIN32 -0s' LDFLAGS='-lwsock32'"
+ 	@echo "and use examples/winpoptest*.c as examples of use"
+ %.o : %.c
+-	$(DIET) $(CC) $(FLAGS) -c $<
++	$(DIET) $(CC) $(CFLAGS) -c $<
+ %-dbg.o : %.c
+-	$(DIET) $(CC) -o $@ -c $(FLAGS) $(DBGFLAGS) $<
++	$(DIET) $(CC) -o $@ -c $(CFLAGS) $(DBGFLAGS) $<
+ libspopc-dbg.a : $(DBGOBJ)
+ 	ar r $@ $(DBGOBJ)
+ 	ranlib $@
+ %-dbg : examples/%.c
+-	$(DIET) $(CC) -I. -o $@ $(DBGFLAGS) $(FLAGS) \
++	$(DIET) $(CC) -I. -o $@ $(DBGFLAGS) $(CFLAGS) \
+ 	$< -L. -lspopc-dbg $(LDFLAGS)
+ debug: libspopc-dbg.a poptest1-dbg poptest2-dbg butcher-dbg
+ libspopc.a : $(OBJECTS)
+ 	$(RM) libspopc*.a
+-	ar r libspopc-$(VERSION).a $(OBJECTS)
+-	ranlib libspopc-$(VERSION).a
+-	ln -s libspopc-$(VERSION).a libspopc.a
++	ar r libspopc.a $(OBJECTS)
++	ranlib libspopc.a
+ libspopc.so : $(OBJECTS)
+ 	$(RM) libspopc*.so
+-	$(DIET) $(CC) -o libspopc-$(VERSION).so -shared $(OBJECTS)
+-	ln -s libspopc-$(VERSION).so libspopc.so
++	$(DIET) $(CC) -shared -Wl,-soname,libspopc.so.0 $(CFLAGS) -o libspopc.so.$(VERSION) $(OBJECTS)
++	ln -snf libspopc.so.$(VERSION) libspopc.so.0.7
++	ln -snf libspopc.so.$(VERSION) libspopc.so.0
++	ln -snf libspopc.so.$(VERSION) libspopc.so
+ %: examples/%.c
+-	$(DIET) $(CC) -o $@ $(FLAGS) $< -L. -lspopc $(LDFLAGS)
++	$(DIET) $(CC) -o $@ $(CFLAGS) $< -L. -lspopc $(LDFLAGS)
+ examples: libspopc.a poptest1 poptest2 butcher
+ uninstall :
+ 	$(RM) $(DESTDIR)/usr/lib/libspopc*.a
