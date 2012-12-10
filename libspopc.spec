@@ -105,3 +105,43 @@ cp doc/README README.examples
 %{_includedir}/*
 %{_libdir}/*.so
 %{_libdir}/*.a
+
+
+%changelog
+* Fri Aug 08 2008 Thierry Vignaud <tvignaud@mandriva.com> 0.7.8-2mdv2009.0
++ Revision: 268003
+- rebuild early 2009.0 package (before pixel changes)
+
+  + Pixel <pixel@mandriva.com>
+    - do not call ldconfig in %%post/%%postun, it is now handled by filetriggers
+
+* Fri May 09 2008 Funda Wang <fundawang@mandriva.org> 0.7.8-1mdv2009.0
++ Revision: 205326
+- New version 0.7.8
+
+  + Olivier Blin <oblin@mandriva.com>
+    - restore BuildRoot
+
+  + Thierry Vignaud <tvignaud@mandriva.com>
+    - kill re-definition of %%buildroot on Pixel's request
+
+* Sun Aug 19 2007 Oden Eriksson <oeriksson@mandriva.com> 0.7.5-1mdv2008.0
++ Revision: 66828
+- fix build (try #1)
+- 0.7.5
+- rediffed P0
+- fix deps
+- conform to the 2008 specs
+- Import libspopc
+
+
+
+* Fri Jul 14 2006 Oden Eriksson <oeriksson@mandriva.com> 0.7.2-1mdk
+- 0.7.2
+
+* Fri Jun 03 2005 Oden Eriksson <oeriksson@mandriva.com> 0.5.8-2mdk
+- rebuild
+
+* Tue May 25 2004 Oden Eriksson <oeriksson@mandrakesoft.com> 0.5.8-1mdk
+- initial cooker contrib
+- added P0
