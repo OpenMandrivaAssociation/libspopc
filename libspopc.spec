@@ -8,7 +8,7 @@ Version:	0.7.8
 Release:	3
 License:	LGPLv2+
 Group:		System/Libraries
-URL:		http://brouits.free.fr/libspopc/
+URL:		https://brouits.free.fr/libspopc/
 Source0:	http://brouits.free.fr/libspopc/releases/%{name}-%{version}.tar.gz
 Patch0:		libspopc-shared.diff
 BuildRequires:	openssl-devel
