@@ -11,6 +11,7 @@ Group:		System/Libraries
 URL:		https://brouits.free.fr/libspopc/
 Source0:	http://brouits.free.fr/libspopc/releases/%{name}-%{version}.tar.gz
 Patch0:		libspopc-shared.diff
+BuildRequires:	make
 BuildRequires:	openssl-devel
 BuildRoot:	%{_tmppath}/%{name}-%{version}-root
 
